@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>HYRON CLOTHING - Virtual Cashier</title>
+     <link rel="stylesheet" href="itsurstyle.css">
+     <style>
+          /* Additional CSS styles for the virtual cashier */
+          #cashierForm {
+               margin-top: 20px;
+          }
+          #cashierForm table {
+               width: 100%;
+               border-collapse: collapse;
+          }
+          #cashierForm th, #cashierForm td {
+               padding: 8px;
+               border-bottom: 1px solid #ddd;
+          }
+          #cashierForm th {
+               background-color: #f2f2f2;
+               text-align: left;
+          }
+          #cashierForm input[type="number"] {
+               display: none; /* Hide the number input */
+          }
+          .quantity-buttons {
+               display: flex;
+               align-items: center;
+          }
+          .quantity-buttons button {
+               padding: 5px 10px;
+               background-color: #007bff;
+               color: #fff;
+               border: none;
+               border-radius: 5px;
+               cursor: pointer;
+               margin-right: 5px;
+          }
+          #cashierForm button:hover {
+               background-color: #0056b3;
+          }
+          #paymentSection {
+               margin-top: 20px;
+          }
+          #paymentSection input[type="number"] {
+               width: 100px;
+          }
+          #paymentSection button {
+               padding: 10px;
+               background-color: #007bff;
+               color: #fff;
+               border: none;
+               border-radius: 5px;
+               cursor: pointer;
+               margin-top: 10px;
+          }
+          #paymentSection button:hover {
+               background-color: #0056b3;
+          }
+     </style>
+</head>
+<body>
+     <header>
+          <img src="D:\DELA CRUZ, HYRON LOTTER\TASK2\logo.jpg" alt="Hyron Clothing Logo"> 
+          <h1>Hyron Clothing - Virtual Cashier</h1> 
+     </header>
+     <nav>
+          <ul>
+               <li><a href="HOME.html">HOME</a></li>
+               <li><a href="MENU.html">MENU</a></li>
+               <li><a href="ABOUT.html">ABOUT US</a></li>
+               <li><a href="CONTACTS.html">CONTACTS</a></li>
+               <li><a href="#">ORDER NOW</a></li>
+          </ul>
+     </nav>
+     <main>
+          <section>
+               <h2>Virtual Cashier</h2>
+               <form id="cashierForm">
+                    <table>
+                         <tr> 
+                             
+                              <th>Item</th>
+                              <th>Price</th>
+                              <th>Quantity</th>
+                         </tr>
+                         <tr> 
+                              
+                              <td>degraded</td>
+                              <td>599</td>
+                              <td class="quantity-buttons">
+                                   <button type="button" onclick="decrementQuantity('degradedQuantity')">-</button> 
+                                   <span id="degradedQuantity"> 0</span>
+                                   <button type="button" onclick="incrementQuantity('degradedQuantity')">+</button>
+                                   <input type="number" id="degradedQuantityInput" value=" ₱">
+                              </td>
+                         </tr>
+                         <tr>
+                               
+                              <td>hghmnds</td>
+                              <td>499</td>
+                              <td class="quantity-buttons">
+                                   <button type="button" onclick="decrementQuantity('hghmndsQuantity')">-</button>
+                                   <span id="hghmndsQuantity"> 0</span>
+                                   <button type="button" onclick="incrementQuantity('hghmndsQuantity')">+</button>
+                                   <input type="number" id="hghmndsQuantityInput" value=" ₱">
+                              </td>
+                         </tr>
+                         <tr> 
+                              
+                              <td>Hoodie</td>
+                              <td>999</td>
+                              <td class="quantity-buttons">
+                                   <button type="button" onclick="decrementQuantity('hoodieQuantity')">-</button>
+                                   <span id="hoodieQuantity"> 0</span>
+                                   <button type="button" onclick="incrementQuantity('hoodieQuantity')">+</button>
+                                   <input type="number" id="hoodieQuantityInput" value=" ₱">
+                              </td>
+                         </tr>
+                         <tr>
+                              
+                              <td>dbtk</td>
+                              <td>699</td>
+                              <td class="quantity-buttons">
+                                   <button type="button" onclick="decrementQuantity('dbtkQuantity')">-</button>
+                                   <span id="dbtkQuantity"> 0</span>
+                                   <button type="button" onclick="incrementQuantity('dbtkQuantity')">+</button>
+                                   <input type="number" id="dbtkQuantityInput" value=" ₱">
+                              </td>
+                         </tr>
+                         <tr>
+                               
+                              <td>grasya</td>
+                              <td>299</td>
+                              <td class="quantity-buttons">
+                                   <button type="button" onclick="decrementQuantity('grasyaQuantity')">-</button>
+                                   <span id="grasyaQuantity"> 0</span>
+                                   <button type="button" onclick="incrementQuantity('grasyaQuantity')">+</button>
+                                   <input type="number" id="grasyaQuantityInput" value=" ₱">
+                              </td>
+                         </tr>
+                         <!-- Add more rows for other items -->
+                    </table>
+                    <button type="button" onclick="calculateTotal()">Calculate Total</button>
+                    <p>Total Amount: <span id="totalAmount"> ₱</span></p>
+               </form>
+               <div id="paymentSection">
+                    <label for="paymentAmount">Enter Payment Amount:</label>
+                    <input type="number" id="paymentAmount" min=" ₱">
+                    <button type="button" onclick="makePayment()">Make Payment</button>
+               </div>
+          </section>
+     </main>
+   
+    <button onclick="goBack()">Go Back</button>
+</footer>
+
+
+     <script>
+          function incrementQuantity(itemId) {
+               var quantityElement = document.getElementById(itemId);
+               var inputElement = document.getElementById(itemId + 'Input');
+               var currentQuantity = parseInt(quantityElement.textContent);
+               quantityElement.textContent = currentQuantity + 1;
+               inputElement.value = parseInt(inputElement.value) + 1;
+          }
+
+          function decrementQuantity(itemId) {
+               var quantityElement = document.getElementById(itemId);
+               var inputElement = document.getElementById(itemId + 'Input');
+               var currentQuantity = parseInt(quantityElement.textContent);
+               if (currentQuantity >  0) {
+                    quantityElement.textContent = currentQuantity - 1;
+                    inputElement.value = parseInt(inputElement.value) - 1;
+               }
+          }
+
+          function calculateTotal() {
+               var degradedPrice = 599;
+               var hghmndsPrice = 499;
+               var hoodiePrice = 999;
+               var dbtkPrice = 699;
+               var grasyaPrice = 299;
+
+               var degradedQuantity = parseInt(document.getElementById('degradedQuantity').textContent);
+               var hghmndsQuantity = parseInt(document.getElementById('hghmndsQuantity').textContent);
+               var hoodieQuantity = parseInt(document.getElementById('hoodieQuantity').textContent);
+               var dbtkQuantity = parseInt(document.getElementById('dbtkQuantity').textContent);
+               var grasyaQuantity = parseInt(document.getElementById('grasyaQuantity').textContent);
+
+               var totalAmount = (degradedPrice * degradedQuantity) + (hghmndsPrice * hghmndsQuantity) + (hoodiePrice * hoodieQuantity) + (dbtkPrice * dbtkQuantity) + (grasyaPrice * grasyaQuantity);
+
+               document.getElementById('totalAmount').textContent = ' ₱ ' + totalAmount;
+          }
+
+          function makePayment() {
+               var totalAmount = parseInt(document.getElementById('totalAmount').textContent.replace(' ₱ ', ''));
+               var paymentAmount = parseInt(document.getElementById('paymentAmount').value);
+
+               if (paymentAmount >= totalAmount) {
+                    var changeDue = paymentAmount - totalAmount;
+                    alert('Payment successful! Change due:  ₱ ' + changeDue);
+               } else {
+                    alert('Insufficient payment amount!');
+               }
+          }
+
+          function goBack() {
+               window.history.back();
+          }
+     </script>
+</body>
+</html>
